@@ -56,3 +56,17 @@ your preferred approach (web interface, cloud formation, CDK, etc.)
 Feel free to raise an issue or PR if you would like to contribute to this
 repo.
 
+## From Video
+
+Local test
+```
+docker build -t julia-lambda:latest . && docker run -it --rm -p 9000:8080 julia-lambda:latest
+curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d "10000"
+```
+
+Push
+```
+export IMAGE_REGISTRY="<acctid>.dkr.ecr.<region>.amazonaws.com"
+aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $IMAGE_REGISTRY
+sh scripts/deploy.sh julia-lambda latest
+```
