@@ -70,3 +70,13 @@ export IMAGE_REGISTRY="<acctid>.dkr.ecr.<region>.amazonaws.com"
 aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $IMAGE_REGISTRY
 sh scripts/deploy.sh julia-lambda latest
 ```
+
+Invoke
+```
+aws lambda invoke \
+    --function-name julia-lambda-test out \
+    --cli-binary-format raw-in-base64-out --payload '10000' \
+    --query 'LogResult'  --log-type Tail  --output text | base64 -d
+```
+
+N.b. Change memeory limit to 5120
