@@ -80,3 +80,8 @@ aws lambda invoke \
 ```
 
 N.b. Change memeory limit to 5120
+
+
+## TODO
+
+Add Package Compilation to docker build
